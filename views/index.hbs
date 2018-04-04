@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+
+    <!-- JQuery for AJAX calls -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!-- Knockout.js, JavaScript library to help with the client-side application UI -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+
+    <!-- The client-side app code -->
+    <script type="text/javascript" src="javascripts/client.js"></script>
+
+
+    <!--Milligram stylesheets. -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+
+    <!-- Custom stylesheet for this app -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+
+
+</head>
+<body>
+
+<h1>Tasks</h1>
+
+<!-- Form for user to enter data about new task. The inputs are bound to variables in the JavaScript -->
+<form>
+    <input data-bind="value: newTaskText" placeholder="Enter your task">
+    Urgent? <input data-bind="checked: newTaskIsUrgent" type="checkbox">
+    <br>
+    <button data-bind="click: saveNewTask">Add Task</button>
+</form>
+
+<!-- For showing temporary messages to the user -->
+<P id="flash-message" data-bind="text: flashMessage"></P>
+
+<P>Click a task to mark as completed or not completed</P>
+
+<!-- Controls for filtering the tasks - what type of task does the user want to see? Completed, not completed, both, neither? -->
+<span>Show Completed: <input type="checkbox"  data-bind="checked: showCompleted"></span>
+<span>Show Not Completed: <input type="checkbox"  data-bind="checked: showNotCompleted"></span>
+
+<!-- This builds the task list. -->
+<div class="container">
+    <div data-bind="foreach: tasks">  <!-- This causes the HTML inside this element to be repeated once per task. -->
+        <div class="row" data-bind="visible: visible">
+
+            <!-- If the task is urgent, make the urgent icon visible-->
+            <div class="column column-10"><img data-bind="visible: urgent" class="urgent-icon" src="images/urgent.png"></div>
+            <!-- When this is clicked, call the taskCompleted function in app.js to toggle the completed field. -->
+            <!-- The data-bind for css reads the completed property and applies a CSS class if the task is completed, -->
+            <!-- which the stylesheet uses to display completed tasks in a different style. -->
+            <div class="column column-70"><span data-bind="text: text, css: { 'done-task': completed }, click: $root.taskCompleted"></span></div>
+            <!-- A button. Clicking this causes the taskDelete function to be called. -->
+            <div class="delete-button-div column column-20"><button class="button button-outline button-delete" data-bind="click: $root.taskDelete">Delete</button></div>
+        </div>
+    </div>
+
+</div>
+
+<button data-bind="click: deleteCompleted">Delete Completed Tasks</button>
+<button data-bind="click: allCompleted">Mark All Tasks Completed</button>
+
+<!-- Displays the total number of tasks, by counting the length of the tasks array.-->
+<P>Total tasks: <span data-bind="text: tasks().length"></span></P>
+
+</body>
+</html>
