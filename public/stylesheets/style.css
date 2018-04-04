@@ -1,55 +1,43 @@
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande",
-  Helvetica, Arial, sans-serif;
+    margin: 25px;
 }
 
-a {
-  color: #00B7FF;
-}
-
-.delete-form, .done-form {
-  display: inline-block;
-}
-
-.done-button {
-  background-color: aqua;
-}
-
-.delete-button {
-  background-color: red;
-  color: white;
-}
-
-.all-done-button {
-  background-color: blueviolet;
-  color:white;
-}
-
+/* Style the task list */
 li {
   padding: 10px;
 }
 
-body {
-    margin: 25px;
+#task-list {
+  margin: 10px;
 }
 
 .urgent-icon {
     height: 25px;
 }
 
+/*  Style for task text, applied only if a task is complete/done */
 .done-task {
     text-decoration: line-through;
     font-style: italic;
     color: gray;
 }
 
+
+/*  Specifically select the delete buttons to override milligram */
 div.delete-button-div > button.button-delete {
     color: #FA6C03;
     border: 0.1rem solid #FA6C03;
 }
 
+body > button.button-delete-all {
+  background-color: red;
+  border: 0.1rem solid red;
+  color:white;
+}
 
-#flash-message {
-    color: darkgreen;
+body > button.button-all-done {
+  background-color: mediumaquamarine;
+  border: 0.1rem solid mediumaquamarine;
+  color:white;
 }

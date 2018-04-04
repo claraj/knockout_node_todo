@@ -15,7 +15,7 @@
     <script type="text/javascript" src="javascripts/client.js"></script>
 
 
-    <!--Milligram stylesheets. -->
+    <!--Milligram stylesheets. Not required, but looks better than mine. -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
@@ -47,7 +47,7 @@
 <span>Show Not Completed: <input type="checkbox"  data-bind="checked: showNotCompleted"></span>
 
 <!-- This builds the task list. -->
-<div class="container">
+<div id="task-list" class="container">
     <div data-bind="foreach: tasks">  <!-- This causes the HTML inside this element to be repeated once per task. -->
         <div class="row" data-bind="visible: visible">
 
@@ -64,11 +64,12 @@
 
 </div>
 
-<button data-bind="click: deleteCompleted">Delete Completed Tasks</button>
-<button data-bind="click: allCompleted">Mark All Tasks Completed</button>
-
 <!-- Displays the total number of tasks, by counting the length of the tasks array.-->
-<P>Total tasks: <span data-bind="text: tasks().length"></span></P>
+<h3>Total tasks: <span data-bind="text: tasks().length"></span></h3>
+
+<button class="button-all-done" data-bind="click: allCompleted">Mark All Tasks Completed</button>
+<button class="button-delete-all" data-bind="click: deleteCompleted">Delete Completed Tasks</button>
+
 
 </body>
 </html>
